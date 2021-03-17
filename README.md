@@ -26,7 +26,14 @@ optional arguments:
 
 ```
 
-* Specify a custom browser
+* Open URL in the default browser
+
+```
+awsm-cli
+
+```
+
+* Open URL in a custom browser
 ```
 awsm-cli -b Firefox
 
