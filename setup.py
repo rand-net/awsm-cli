@@ -23,6 +23,6 @@ setup(
     packages=["awsm_cli"],
     include_package_data=True,
     entry_points={"console_scripts": ["awsm-cli = awsm_cli.__init__:main"]},
-    install_requires=["art", "prompt-toolkit", "requests",],
+    install_requires=["art", "prompt-toolkit", "requests"],
     keywords=["awesome list", "awesome", "resources", "lists", "mammoths"],
 )
