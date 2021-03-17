@@ -1,0 +1,8 @@
+art==5.1
+certifi==2020.12.5
+chardet==4.0.0
+idna==2.10
+prompt-toolkit==3.0.17
+requests==2.25.1
+urllib3==1.26.4
+wcwidth==0.2.5
