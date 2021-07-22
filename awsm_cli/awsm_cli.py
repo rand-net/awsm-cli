@@ -4,6 +4,7 @@ import subprocess
 import webbrowser
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import FuzzyWordCompleter
+import sys
 
 
 class AwsmCLI:
@@ -18,18 +19,42 @@ class AwsmCLI:
     def __init__(self, browser=None):
         tprint("AWSM-CLI")
         print("Downloading Domain List...\n")
-        awesome_list_source = requests.get(
-            "https://raw.githubusercontent.com/lockys/Awesome.json/master/awesome/awesome.json"
-        )
+        self.awesome_list_json_url = "https://raw.githubusercontent.com/lockys/Awesome.json/master/awesome/awesome.json"
+        self.awesome_list = []
         self.browser = browser
-        self.awesome_list = awesome_list_source.json()
         self.selected_domain = ""
         self.selected_topic = ""
         self.selected_topic_repo = ""
-        self.topic_repo_json_url = (
+        self.topic_repo_json_base_url = (
             "https://raw.githubusercontent.com/lockys/Awesome.json/master/repo-json/"
         )
+
+        self.awesome_topic_repo_json = ""
         self.selcted_item_url = ""
+
+    def get_awesome_list_json(self):
+        """Retrieves Awesome List JSON"""
+
+        try:
+            awesome_list_source = requests.get(
+                "https://raw.githubusercontent.com/lockys/Awesome.json/master/awesome/awesome.json"
+            )
+        except requests.ConnectionError as e:
+            print("Error Connecting!\n", e)
+            sys.exit(1)
+        except requests.exceptions.HTTPError as errh:
+            print("Http Error:", errh)
+            sys.exit(1)
+        except requests.exceptions.ConnectionError as errc:
+            print("Error Connecting:", errc)
+            sys.exit(1)
+        except requests.exceptions.Timeout as errt:
+            print("Timeout Error:", errt)
+            sys.exit(1)
+        except requests.exceptions.RequestException as err:
+            print("OOps: Something Else", err)
+            sys.exit(1)
+        self.awesome_list = awesome_list_source.json()
 
     def domain_prompt(self):
         """
@@ -58,19 +83,37 @@ class AwsmCLI:
             "repo"
         ].replace("/", "-")
 
+    def get_topic_repo_json(self):
+        # Get JSON data about repo
+        awesome_repo_url = (
+            self.topic_repo_json_base_url + self.selected_topic_repo + ".json"
+        )
+        try:
+            awesome_repo_source = requests.get(awesome_repo_url)
+        except requests.ConnectionError as e:
+            print("Error Connecting!\n", e)
+            sys.exit(1)
+        except requests.exceptions.HTTPError as errh:
+            print("Http Error:", errh)
+            sys.exit(1)
+        except requests.exceptions.ConnectionError as errc:
+            print("Error Connecting:", errc)
+            sys.exit(1)
+        except requests.exceptions.Timeout as errt:
+            print("Timeout Error:", errt)
+            sys.exit(1)
+        except requests.exceptions.RequestException as err:
+            print("OOps: Something Else", err)
+        self.awesome_topic_repo_json = awesome_repo_source.json()
+
     def item_prompt(self):
         """
         Prompt for item selection
         """
 
-        # Get JSON data about repo
-        awesome_repo_url = self.topic_repo_json_url + self.selected_topic_repo + ".json"
-        awesome_repo_source = requests.get(awesome_repo_url)
-        awesome_repo_json = awesome_repo_source.json()
-
         item_urls = []
         item_names_descriptions = []
-        for item_info in awesome_repo_json:
+        for item_info in self.awesome_topic_repo_json:
             item_urls.append(item_info["url"])
             try:
                 item_names_descriptions.append(

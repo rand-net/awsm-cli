@@ -2,7 +2,7 @@ from .awsm_cli import *
 import argparse
 import sys
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 
 def main(argv=None):
@@ -15,16 +15,10 @@ def main(argv=None):
     )
     args = argparser.parse_args()
 
-    if args.browser:
-        awsm_cli = AwsmCLI(args.browser)
-        selected_domain = awsm_cli.domain_prompt()
-        domain_topic_repo = awsm_cli.topic_prompt()
-        selected_item_url = awsm_cli.item_prompt()
-        awsm_cli.open_item_browser()
-
-    else:
-        awsm_cli = AwsmCLI(args.browser)
-        selected_domain = awsm_cli.domain_prompt()
-        domain_topic_repo = awsm_cli.topic_prompt()
-        selected_item_url = awsm_cli.item_prompt()
-        awsm_cli.open_item_browser()
+    awsm_cli = AwsmCLI(args.browser)
+    awsm_cli.get_awesome_list_json()
+    awsm_cli.domain_prompt()
+    awsm_cli.topic_prompt()
+    awsm_cli.get_topic_repo_json()
+    awsm_cli.item_prompt()
+    awsm_cli.open_item_browser()
