@@ -1,5 +1,8 @@
-from awsm_cli import *
 import unittest
+import sys
+
+sys.path.append("../awsm_cli")
+from awsm_cli.awsm_cli import *
 
 
 class TestAwsmCLI(unittest.TestCase):

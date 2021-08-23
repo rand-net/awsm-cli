@@ -26,15 +26,48 @@ optional arguments:
 
 ```
 
-* Open URL in the default browser
+* Open URL in the default browser.
 
 ```
-awsm-cli
+$ awsm-cli
+
+    _    __        __ ____   __  __          ____  _      ___
+   / \   \ \      / // ___| |  \/  |        / ___|| |    |_ _|
+  / _ \   \ \ /\ / / \___ \ | |\/| | _____ | |    | |     | |
+ / ___ \   \ V  V /   ___) || |  | ||_____|| |___ | |___  | |
+/_/   \_\   \_/\_/   |____/ |_|  |_|        \____||_____||___|
+
+
+Downloading Domain List...
+
+Domain:_
+         Platforms
+         Programming Languages
+         Front-End Development
+         Back-End Development
+         Computer Science
+         Big Data
+         Theory
+
+
 
 ```
 
-* Open URL in a custom browser
+* Open URL in a custom browser.
 ```
-awsm-cli -b Firefox
+$ awsm-cli -b Firefox
+    _    __        __ ____   __  __          ____  _      ___
+   / \   \ \      / // ___| |  \/  |        / ___|| |    |_ _|
+  / _ \   \ \ /\ / / \___ \ | |\/| | _____ | |    | |     | |
+ / ___ \   \ V  V /   ___) || |  | ||_____|| |___ | |___  | |
+/_/   \_\   \_/\_/   |____/ |_|  |_|        \____||_____||___|
+
+
+Downloading Domain List...
+Domain: Programming Languages
+Topic: Go
+Item: cli -> Feature-rich and easy to use command-line package based on golang struct tags.
+
+cli -> Feature-rich and easy to use command-line package based on golang struct tags.
 
 ```
